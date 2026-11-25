@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICT Quest | Learn • Play • Achieve</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+:root{
+  --ink:#17243c;--muted:#66738c;--blue:#5268f5;--cyan:#19c7d7;--pink:#f28bb6;--gold:#ffd166;
+  --bg:#f4f6ff;--card:#fff;--line:#e8ebf5;--green:#16a879;--shadow:0 14px 40px #25356b12;
+  --addie-ink:#202044;--addie-muted:#686887;--purple:#7057d9;--purple2:#9a7bff;
+  --mint:#70d9c4;--cream:#fffaf5;--lav:#f2edff;--addie-line:#e6e0f5;--deck-shadow:0 24px 70px #29205226;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 'DM Sans',Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+h1,h2,h3{font-family:Manrope,'DM Sans',sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit;text-decoration:none}
+
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.side{background:#111a35;color:#fff;padding:25px 17px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;align-items:center;gap:12px;padding:5px 8px 28px}
+.logo{width:43px;height:43px;border-radius:15px;background:linear-gradient(135deg,#20d3d9,#6a6bff);display:grid;place-items:center;font-size:22px}
+.brand b{font-size:17px;letter-spacing:.2px}.brand small{display:block;color:#aeb9d7;font-size:11px}
+.navlabel{font-size:10px;color:#7f8bab;letter-spacing:1.6px;padding:15px 12px 7px}
+.nav button{width:100%;display:flex;align-items:center;gap:12px;text-align:left;padding:12px;border-radius:12px;color:#c4cce0;background:transparent;margin:3px 0}
+.nav button.active,.nav button:hover{background:#26345c;color:#fff}
+.nav .ico{width:22px;text-align:center;font-size:17px}
+.sidefoot{margin-top:28px;padding:14px;border:1px solid #334064;border-radius:14px;color:#b8c2dc;font-size:12px}
+.main{min-width:0;padding:28px clamp(16px,4vw,52px) 60px;max-width:1500px;width:100%;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:27px}
+.crumb{font-size:12px;color:var(--muted)}.topright{display:flex;align-items:center;gap:10px}
+.pill{border-radius:30px;background:#fff;padding:8px 13px;font-size:12px;border:1px solid var(--line)}
+.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#e9eaff;color:var(--blue);font-weight:800}
+.hero{background:linear-gradient(115deg,#202d63,#5268f5 58%,#21c4d1);border-radius:25px;padding:35px;color:white;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero:after{content:"✦";position:absolute;font-size:220px;right:7%;top:-55px;color:#ffffff18}
+.hero .eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c9e9ff}
+.hero h1{font-size:clamp(28px,4vw,44px);line-height:1.13;margin:10px 0;max-width:650px}
+.hero p{color:#e1eaff;max-width:570px;margin:0 0 22px}
+.btn{padding:11px 17px;border-radius:12px;background:var(--blue);color:white;font-weight:700;box-shadow:0 6px 15px #5268f533}
+.btn.light{background:#fff;color:#3447bb}.btn.ghost{background:#eef0ff;color:#4858cb;box-shadow:none}.btn.dark{background:#182342}.btn.small{padding:7px 11px;font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:19px 0 28px}
+.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.stat{display:flex;align-items:center;gap:13px}.stat .sico{width:43px;height:43px;border-radius:14px;background:#eef0ff;display:grid;place-items:center;font-size:20px}
+.stat strong{font-size:23px;display:block;line-height:1.1}.stat small{color:var(--muted);font-size:11px}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:26px 0 13px}
+.sectionhead h2{font-size:21px;margin:0}.sectionhead p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.lesson{display:flex;gap:15px;align-items:flex-start;position:relative}
+.lessonicon{width:52px;height:52px;flex:none;border-radius:16px;display:grid;place-items:center;font-size:25px;background:#eef2ff}
+.lesson h3{font-size:15px;margin:0 0 4px}.lesson p{font-size:12px;color:var(--muted);margin:0 0 12px}
+.tag{display:inline-block;border-radius:30px;padding:4px 8px;background:#f0f2ff;color:#5363cf;font-size:10px;font-weight:700;margin:0 4px 4px 0}
+.progress{height:7px;border-radius:10px;background:#edf0f7;overflow:hidden;margin:9px 0}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:10px}
+.muted{color:var(--muted)}.hidden{display:none!important}
+
+.lessonhead{background:linear-gradient(110deg,#25356c,#566af4);color:white;border-radius:22px;padding:22px 25px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.lessonhead-copy{min-width:0;flex:1}
+.lessonhead h1{margin:4px 0;font-size:25px;max-width:850px}.lessonhead p{margin:0;color:#e1e7ff;font-size:14px}
+.lesson-map-shortcut{flex:none;background:#ffffff20;border:1px solid #ffffff70;color:#fff;border-radius:15px;padding:11px 14px;font-weight:800;display:flex;align-items:center;gap:9px}
+.lesson-map-shortcut:hover{background:#ffffff35}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tabs button{background:#fff;border:1px solid var(--line);border-radius:30px;padding:8px 14px;font-size:12px;color:var(--muted);font-weight:700}
+.tabs button.active{background:#26366e;color:white;border-color:#26366e}
+
+/* Unified ADDIE Slide Deck across ALL lessons */
+.slide-stage{
+  position:relative;
+  border-radius:28px;
+  padding:22px 22px 68px;
+  background:radial-gradient(ellipse at 10% 0%,#51417c 0,transparent 42%),radial-gradient(ellipse at 95% 100%,#3e6c77 0,transparent 40%),#211c3d;
+  box-shadow:var(--deck-shadow);
+  overflow:hidden;
+}
+.slide-stage:fullscreen,.slide-stage:-webkit-full-screen{
+  border-radius:0;padding:24px;display:flex;align-items:center;justify-content:center;width:100vw;height:100vh;
+}
+.slide-stage:fullscreen .addie-slide,.slide-stage:-webkit-full-screen .addie-slide{
+  width:min(1240px,95vw);height:min(710px,87vh);
+}
+.deck-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;padding:0 6px;color:#e8e3ff;font-size:11px;letter-spacing:.04em}
+.deck-dots{display:flex;gap:6px;flex-wrap:wrap}
+.deck-dot{width:26px;height:7px;border-radius:99px;background:#ffffff30;cursor:pointer;transition:.2s;border:0;padding:0}
+.deck-dot.active{background:linear-gradient(90deg,var(--pink),var(--mint));width:38px}
+
+.addie-slide{
+  display:none;
+  width:100%;
+  min-height:560px;
+  background:var(--cream);
+  color:var(--addie-ink);
+  border-radius:28px;
+  box-shadow:0 24px 80px #120c2c55;
+  position:relative;
+  overflow:hidden;
+  padding:42px 52px 58px;
+}
+.addie-slide.active{display:flex;flex-direction:column;animation:slideIn .28s ease-out}
+@keyframes slideIn{from{opacity:.35;transform:translateY(10px) scale(.995)}to{opacity:1;transform:none}}
+.addie-slide:before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:#e7defd;right:-160px;top:-175px;opacity:.72;pointer-events:none}
+.addie-slide:after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;background:#d8f6ed;left:-120px;bottom:-135px;opacity:.82;pointer-events:none}
+.addie-content{position:relative;z-index:1;display:flex;flex-direction:column;flex:1;justify-content:space-between}
+.addie-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.17em;font-weight:800;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:9px}
+.addie-kicker:before{content:"";width:25px;height:3px;background:var(--pink);border-radius:3px}
+.addie-slide h1{font-size:clamp(30px,4vw,52px);line-height:1.06;letter-spacing:-.045em;margin:0 0 14px;color:var(--addie-ink)}
+.addie-slide h2{font-size:clamp(24px,2.8vw,36px);line-height:1.12;letter-spacing:-.035em;margin:0 0 16px;color:var(--addie-ink)}
+.addie-slide h3{font-size:18px;line-height:1.25;margin:0 0 8px;color:var(--addie-ink)}
+.addie-slide p{font-size:15px;line-height:1.58;color:#535370;margin:0 0 10px}
+.addie-lead{font-size:18px;line-height:1.52;max-width:820px;color:#64617f;margin-bottom:14px}
+.addie-pill{display:inline-flex;align-items:center;background:#eee8ff;color:#5a42b8;border-radius:99px;padding:8px 14px;font-weight:800;font-size:12px;width:max-content}
+
+.addie-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:4px}
+.addie-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.addie-card{background:#fff;border:1px solid var(--addie-line);border-radius:20px;padding:18px 20px;box-shadow:0 6px 20px #3b2b6d0b;transition:transform .2s,box-shadow .2s,border-color .2s}
+.addie-card:hover{transform:translateY(-3px);box-shadow:0 14px 28px #3b2b6d16;border-color:#c8b9ff}
+.addie-card p,.addie-card li{font-size:14px;line-height:1.5;color:#535370}
+.addie-card ul{margin:8px 0 0;padding-left:20px}
+.addie-icon{font-size:26px;margin-bottom:8px}
+.addie-callout{background:#e7f8f2;border-left:5px solid var(--mint);border-radius:14px;padding:13px 17px;margin-top:14px;font-size:14px;line-height:1.5;color:#315d56}
+
+/* Unified Hero & Closing Slide Theme across ALL lessons */
+.addie-slide.hero-slide,.addie-slide.end-slide{background:linear-gradient(130deg,#30254f 0%,#55428a 52%,#2d6f77 100%);color:white}
+.addie-slide.hero-slide:before,.addie-slide.end-slide:before{background:#b7a2ff;opacity:.18}
+.addie-slide.hero-slide:after,.addie-slide.end-slide:after{background:#8ee6cf;opacity:.16}
+.addie-slide.hero-slide h1,.addie-slide.end-slide h1{color:white}
+.addie-slide.hero-slide p,.addie-slide.end-slide p{color:#e8e3ff}
+.addie-slide.hero-slide .addie-kicker,.addie-slide.end-slide .addie-kicker{color:#aef4e2}
+.addie-slide.hero-slide .addie-content{justify-content:center;max-width:74%}
+.addie-slide.hero-slide .addie-pill{background:#ffffff20;color:white;border:1px solid #ffffff28}
+.addie-hero-art{position:absolute;right:6%;bottom:14%;width:250px;height:250px;display:grid;place-items:center;pointer-events:none}
+.addie-orbit{position:absolute;border:1px solid #ffffff65;border-radius:50%;width:240px;height:240px;animation:addieSpin 22s linear infinite}
+.addie-orbit:before,.addie-orbit:after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:var(--mint);top:28px;left:24px;box-shadow:0 0 22px #70d9c4}
+.addie-orbit:after{background:var(--pink);top:auto;left:auto;bottom:22px;right:14px}
+@keyframes addieSpin{to{transform:rotate(360deg)}}
+.addie-core{width:148px;height:148px;border-radius:36px;background:linear-gradient(140deg,#a38aff,#6f57d9);display:grid;place-items:center;font-size:58px;box-shadow:0 22px 45px #100b2c65;transform:rotate(-7deg)}
+.addie-slide.end-slide .addie-content{justify-content:center;align-items:center;text-align:center}
+.addie-slide.end-slide .addie-card{background:#fffdfd;border-color:#e4dcfa;text-align:left}
+.addie-slide.end-slide .addie-card h3{color:#292449}
+.addie-slide.end-slide .addie-card p{color:#55516f}
+
+/* Unified Concept & Step Colors across ALL lessons */
+.concept-tap{cursor:pointer;position:relative}
+.concept-tap.selected{border-color:var(--purple2);background:#faf8ff;box-shadow:0 12px 26px #7057d924}
+.concept-tap .tap-hint{font-size:11px;font-weight:800;color:var(--purple);margin-top:8px;display:inline-block}
+.concept-title-0{color:#7057d9!important}
+.concept-title-1{color:#168c7c!important}
+.concept-title-2{color:#c34b83!important}
+
+.addie-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:10px 0}
+.addie-step{border-radius:18px;padding:15px 12px;text-align:center;background:white;border:1px solid var(--addie-line);cursor:pointer;transition:.2s}
+.addie-step:hover,.addie-step.selected{transform:translateY(-4px);border-color:var(--purple2);box-shadow:0 12px 25px #7057d92b}
+.addie-step .letter{width:44px;height:44px;border-radius:14px;margin:0 auto 9px;display:grid;place-items:center;color:white;font-size:16px;font-weight:900}
+.addie-step:nth-child(1) .letter{background:var(--purple)}
+.addie-step:nth-child(2) .letter{background:#36bfa5}
+.addie-step:nth-child(3) .letter{background:#f3b83f;color:#644600}
+.addie-step:nth-child(4) .letter{background:#f28bb6;color:#692c4a}
+.addie-step strong{display:block;font-size:13px;color:var(--addie-ink)}
+.addie-step small{display:block;margin-top:4px;color:var(--addie-muted);font-size:11px}
+
+.addie-list{display:grid;gap:9px}
+.addie-list-item{display:flex;gap:12px;align-items:flex-start;background:white;border:1px solid var(--addie-line);border-radius:14px;padding:11px 14px}
+.addie-dot{flex:0 0 30px;height:30px;border-radius:10px;background:#eee8ff;color:var(--purple);font-weight:900;display:grid;place-items:center;font-size:13px}
+.addie-list-item p{font-size:14px;margin:0}
+.addie-reveal{border:1px solid #d8cff5;background:#f6f2ff;color:#5c45b5;padding:10px 14px;border-radius:12px;font-weight:800;cursor:pointer;margin-top:10px;font-size:13px}
+.addie-reveal:hover{background:#ece4ff}
+.addie-answer{display:none;background:#e7f8f2;color:#315d56;padding:12px 14px;border-radius:12px;margin-top:10px;font-size:13.5px;line-height:1.5;border-left:4px solid var(--mint)}
+.addie-answer.show{display:block}
+.addie-choice{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--addie-line);border-radius:12px;padding:11px 14px;margin:7px 0;color:var(--addie-ink);font-weight:600;font-size:14px;transition:.15s}
+.addie-choice:hover{background:#f2edff;border-color:#b8a8fa}
+.addie-choice.correct{background:#e4f8ef;border-color:#69cba8;color:#155e47}
+.addie-choice.wrong{background:#fff0f3;border-color:#f3a0b8;color:#8e2a47}
+
+.addie-footer{position:absolute;bottom:16px;left:52px;right:52px;display:flex;align-items:center;justify-content:space-between;color:#9994b0;font-size:11px;z-index:2;letter-spacing:.04em}
+.addie-slide.hero-slide .addie-footer,.addie-slide.end-slide .addie-footer{color:#c7c0eb}
+
+.deck-controls{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:9px;padding:6px 10px;background:#fffefaed;border:1px solid #ffffff88;border-radius:99px;box-shadow:0 8px 26px #100b2c45;z-index:10}
+.deck-controls button{border:0;background:var(--purple);color:white;border-radius:50%;width:34px;height:34px;font-size:18px;cursor:pointer;transition:.15s;display:grid;place-items:center}
+.deck-controls button:hover{background:#5139ba;transform:scale(1.06)}
+.deck-controls button:disabled{opacity:.28;cursor:not-allowed;transform:none}
+.deck-counter{min-width:64px;text-align:center;font-size:12px;font-weight:900;color:var(--addie-ink)}
+.deck-progress{position:absolute;bottom:0;left:0;height:5px;background:linear-gradient(90deg,var(--pink),var(--purple2),var(--mint));width:0;transition:width .25s;z-index:11}
+
+/* Quizzes, Games, Tables */
+.quizq{padding:16px;border:1px solid var(--line);border-radius:15px;margin:12px 0;background:#fff}
+.quizq h3{margin:0 0 10px;font-size:14px}
+.option{display:block;padding:9px 11px;border:1px solid var(--line);border-radius:10px;margin:7px 0;cursor:pointer;font-size:13px}
+.option:has(input:checked){border-color:var(--blue);background:#f2f3ff}
+.feedback{font-weight:700;margin-top:10px;font-size:13px}
+.gamegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.gamecard{padding:18px;background:#fff;border:1px solid var(--line);border-radius:17px;cursor:pointer;transition:.2s}
+.gamecard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.gamecard .big{font-size:27px}.gamecard h3{margin:7px 0 2px;font-size:15px}.gamecard p{margin:0;color:var(--muted);font-size:12px}
+.gamebox{background:#fff;border:1px solid var(--line);padding:22px;border-radius:18px;margin-top:15px}
+.scoreboard{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.team{border-radius:16px;padding:17px;color:white}
+.team.girls{background:linear-gradient(120deg,#ec5f9b,#ff91bd)}
+.team.boys{background:linear-gradient(120deg,#4260d9,#39a8e9)}
+.team strong{font-size:29px;display:block}
+.team button{background:#ffffff2b;color:white;border:1px solid #ffffff55;border-radius:9px;padding:6px 10px;margin:8px 4px 0 0}
+.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.field{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:0}
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th,.table td{text-align:left;padding:11px;border-bottom:1px solid var(--line)}
+.table th{color:var(--muted);font-size:11px}
+.empty{text-align:center;padding:30px;color:var(--muted)}
+.notice{background:#fff8e9;border:1px solid #ffe7b6;color:#805a12;padding:12px 14px;border-radius:13px;font-size:12px;margin:14px 0}
+
+/* Sketchbook Pastel Mind Map (Inspired by Reference Layout) */
+.mindmap-wrap{
+  background:#faf6ee;
+  border:1.5px solid #2b283322;
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 14px 36px #23203314;
+}
+.mm-ref-stage{
+  background:#faf6ee;
+  border:1.5px solid #23212926;
+  border-radius:20px;
+  padding:16px;
+  overflow-x:auto;
+}
+.mm-ref-stage svg{
+  width:100%;
+  min-width:820px;
+  height:auto;
+  display:block;
+}
+.mm-ref-text{
+  font-family:'DM Sans',Manrope,sans-serif;
+  fill:#232129;
+  font-weight:700;
+}
+.mm-ref-title{
+  font-family:Manrope,'DM Sans',sans-serif;
+  fill:#232129;
+  font-weight:800;
+}
+.mm-ref-sub{
+  font-family:'DM Sans',sans-serif;
+  fill:#373444;
+  font-weight:600;
+}
+
+/* Enhanced Polish & Consistent Lesson Presentation (v3) */
+.lessonhead{
+  background:linear-gradient(120deg,#262147 0%,#52438f 55%,#276d78 100%);
+  border:1px solid #ffffff2b;
+  box-shadow:0 18px 42px #211a4224;
+}
+.tabs button{
+  padding:9px 16px;
+  font-size:12.5px;
+  box-shadow:0 4px 12px #25356b08;
+  transition:.18s ease;
+}
+.tabs button:hover{
+  transform:translateY(-1px);
+  border-color:#c6b8f5;
+  color:#202044;
+}
+.tabs button.active{
+  background:linear-gradient(120deg,#52438f,#7057d9);
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 8px 20px #52438f33;
+}
+.addie-slide{
+  border:1px solid #e5defa;
+}
+.addie-card{
+  border-radius:22px;
+  padding:20px 22px;
+}
+.addie-callout{
+  background:linear-gradient(120deg,#e7f8f2 0%,#f2edff 100%);
+  border-left:5px solid #52438f;
+  color:#232245;
+  box-shadow:0 6px 18px #3b2b6d08;
+}
+
+/* Full Mind Map Visual Diagram + Branch Cards */
+.mm-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:14px;
+  padding:10px 14px;
+  background:#fff;
+  border:1px solid var(--addie-line);
+  border-radius:16px;
+}
+.mm-svg-box{
+  background:#fff;
+  border:1px solid var(--addie-line);
+  border-radius:20px;
+  padding:14px;
+  margin-bottom:16px;
+  overflow:auto;
+}
+.mm-svg-box svg{
+  width:100%;
+  min-width:740px;
+  height:auto;
+  display:block;
+}
+
+
+/* Distinct per-lesson visual themes (v4) */
+.slide-stage[data-lesson-theme="0"]{
+  --purple:#1f8a70;--purple2:#36b395;--mint:#9be7d8;--pink:#f6bd60;--cream:#f6fbf9;
+  background:radial-gradient(ellipse at 10% 0%,#1f6f68 0,transparent 42%),radial-gradient(ellipse at 95% 100%,#2b5876 0,transparent 42%),#162c36;
+}
+.slide-stage[data-lesson-theme="0"] .addie-slide.hero-slide,
+.slide-stage[data-lesson-theme="0"] .addie-slide.end-slide{
+  background:linear-gradient(130deg,#134e5e 0%,#1f8a70 55%,#2b5876 100%);
+}
+.slide-stage[data-lesson-theme="0"] .addie-slide:before{background:#b8efe3}
+.slide-stage[data-lesson-theme="0"] .addie-slide:after{background:#ffe8b3}
+
+.slide-stage[data-lesson-theme="1"]{
+  --purple:#b83b5e;--purple2:#e05a77;--mint:#ff9a8b;--pink:#ffd166;--cream:#fff8f8;
+  background:radial-gradient(ellipse at 12% 0%,#7a243d 0,transparent 42%),radial-gradient(ellipse at 95% 100%,#2d3142 0,transparent 42%),#1f1d2d;
+}
+.slide-stage[data-lesson-theme="1"] .addie-slide.hero-slide,
+.slide-stage[data-lesson-theme="1"] .addie-slide.end-slide{
+  background:linear-gradient(130deg,#3b1d36 0%,#9e2a4b 56%,#2d3142 100%);
+}
+.slide-stage[data-lesson-theme="1"] .addie-slide:before{background:#ffd6e0}
+.slide-stage[data-lesson-theme="1"] .addie-slide:after{background:#ffe5b4}
+
+.slide-stage[data-lesson-theme="2"]{
+  --purple:#1d5fd6;--purple2:#3b82f6;--mint:#38bdf8;--pink:#a78bfa;--cream:#f5f9ff;
+  background:radial-gradient(ellipse at 10% 0%,#1e40af 0,transparent 42%),radial-gradient(ellipse at 95% 100%,#0f766e 0,transparent 42%),#132238;
+}
+.slide-stage[data-lesson-theme="2"] .addie-slide.hero-slide,
+.slide-stage[data-lesson-theme="2"] .addie-slide.end-slide{
+  background:linear-gradient(130deg,#172554 0%,#1d5fd6 56%,#0e7490 100%);
+}
+.slide-stage[data-lesson-theme="2"] .addie-slide:before{background:#dbeafe}
+.slide-stage[data-lesson-theme="2"] .addie-slide:after{background:#cffafe}
+
+.slide-stage[data-lesson-theme="3"]{
+  --purple:#c85a17;--purple2:#ea7c28;--mint:#fcd34d;--pink:#fb7185;--cream:#fffaf4;
+  background:radial-gradient(ellipse at 10% 0%,#7c2d12 0,transparent 42%),radial-gradient(ellipse at 95% 100%,#312e81 0,transparent 42%),#231b26;
+}
+.slide-stage[data-lesson-theme="3"] .addie-slide.hero-slide,
+.slide-stage[data-lesson-theme="3"] .addie-slide.end-slide{
+  background:linear-gradient(130deg,#431407 0%,#c2410c 55%,#3730a3 100%);
+}
+.slide-stage[data-lesson-theme="3"] .addie-slide:before{background:#ffedd5}
+.slide-stage[data-lesson-theme="3"] .addie-slide:after{background:#fef3c7}
+
+.slide-stage[data-lesson-theme="4"]{
+  --purple:#a21caf;--purple2:#c026d3;--mint:#5eead4;--pink:#f472b6;--cream:#fdf6ff;
+  background:radial-gradient(ellipse at 10% 0%,#701a75 0,transparent 42%),radial-gradient(ellipse at 95% 100%,#1e3a8a 0,transparent 42%),#221436;
+}
+.slide-stage[data-lesson-theme="4"] .addie-slide.hero-slide,
+.slide-stage[data-lesson-theme="4"] .addie-slide.end-slide{
+  background:linear-gradient(130deg,#3b0764 0%,#9d174d 54%,#1e40af 100%);
+}
+.slide-stage[data-lesson-theme="4"] .addie-slide:before{background:#fae8ff}
+.slide-stage[data-lesson-theme="4"] .addie-slide:after{background:#ccfbf1}
+
+.slide-stage[data-lesson-theme="5"]{
+  --purple:#0f766e;--purple2:#14b8a6;--mint:#86efac;--pink:#fbbf24;--cream:#f4fdf9;
+  background:radial-gradient(ellipse at 10% 0%,#14532d 0,transparent 42%),radial-gradient(ellipse at 95% 100%,#1e3a8a 0,transparent 42%),#122628;
+}
+.slide-stage[data-lesson-theme="5"] .addie-slide.hero-slide,
+.slide-stage[data-lesson-theme="5"] .addie-slide.end-slide{
+  background:linear-gradient(130deg,#064e3b 0%,#0f766e 56%,#1d4ed8 100%);
+}
+.slide-stage[data-lesson-theme="5"] .addie-slide:before{background:#dcfce7}
+.slide-stage[data-lesson-theme="5"] .addie-slide:after{background:#fef9c3}
+
+.slide-stage[data-lesson-theme="6"]{
+  --purple:#3730a3;--purple2:#4f46e5;--mint:#67e8f9;--pink:#f9a8d4;--cream:#f6f7ff;
+  background:radial-gradient(ellipse at 10% 0%,#312e81 0,transparent 42%),radial-gradient(ellipse at 95% 100%,#831843 0,transparent 42%),#191936;
+}
+.slide-stage[data-lesson-theme="6"] .addie-slide.hero-slide,
+.slide-stage[data-lesson-theme="6"] .addie-slide.end-slide{
+  background:linear-gradient(130deg,#1e1b4b 0%,#4338ca 56%,#9d174d 100%);
+}
+.slide-stage[data-lesson-theme="6"] .addie-slide:before{background:#e0e7ff}
+.slide-stage[data-lesson-theme="6"] .addie-slide:after{background:#fce7f3}
+
+.slide-stage[data-lesson-theme="7"]{
+  --purple:#b45309;--purple2:#d97706;--mint:#6ee7b7;--pink:#93c5fd;--cream:#fffdf5;
+  background:radial-gradient(ellipse at 10% 0%,#78350f 0,transparent 42%),radial-gradient(ellipse at 95% 100%,#134e4a 0,transparent 42%),#231f19;
+}
+.slide-stage[data-lesson-theme="7"] .addie-slide.hero-slide,
+.slide-stage[data-lesson-theme="7"] .addie-slide.end-slide{
+  background:linear-gradient(130deg,#451a03 0%,#b45309 55%,#0f766e 100%);
+}
+.slide-stage[data-lesson-theme="7"] .addie-slide:before{background:#fef3c7}
+.slide-stage[data-lesson-theme="7"] .addie-slide:after{background:#d1fae5}
+
+
+/* Mind Map Modal, Launch Banner & Library Cards */
+.mind-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0e1326a8;
+  backdrop-filter:blur(4px);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.mind-modal.open{display:flex}
+.mind-dialog{
+  background:#faf6ee;
+  color:#232129;
+  border:2px solid #23212933;
+  border-radius:24px;
+  width:min(1060px,96vw);
+  max-height:90vh;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 28px 80px #090c1c80;
+  overflow:hidden;
+}
+.mind-modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:16px 22px;
+  background:#fff;
+  border-bottom:1px solid #e5dfd2;
+}
+.mind-modal-head h2{
+  margin:0;
+  font-size:18px;
+  color:#17243c;
+}
+.mind-close{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#f1eef8;
+  color:#232129;
+  font-size:22px;
+  font-weight:800;
+  display:grid;
+  place-items:center;
+}
+.mind-close:hover{background:#e2daf7}
+.mind-modal-body{
+  padding:18px;
+  overflow:auto;
+  flex:1;
+}
+.mind-launch{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.mind-launch-icon{
+  width:56px;
+  height:56px;
+  border-radius:18px;
+  background:#eee8ff;
+  display:grid;
+  place-items:center;
+  font-size:28px;
+  flex:none;
+}
+.mind-library-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:12px;
+}
+.mind-library-icon{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  background:#f3efff;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  flex:none;
+}
+
+
+.mind-dialog.zoomed{
+  width:99vw;
+  max-height:96vh;
+}
+.mind-dialog.zoomed .mm-ref-stage svg{
+  min-width:1120px;
+}
+
+</style></head>
+<body><div class="app">
+<aside class="side"><div class="brand"><div class="logo">⚡</div><div><b>ICT QUEST</b><small>LEARN • PLAY • ACHIEVE</small></div></div>
+<div class="navlabel">LEARNING SPACE</div><nav class="nav">
+<button class="active" data-page="home"><span class="ico">⌂</span>Dashboard</button>
+<button data-page="lessons"><span class="ico">📚</span>All Lessons</button>
+<button data-page="games"><span class="ico">🎮</span>Game Arena</button>
+<button data-page="teams"><span class="ico">🏆</span>Team Battle</button>
+<button data-page="students"><span class="ico">🌟</span>Participation</button>
+<button data-page="mindmaps"><span class="ico">🧠</span>Mind Maps</button>
+</nav><div class="navlabel">YOUR PROGRESS</div><div class="sidefoot">✨ Every question is a chance to level up!<br><br><b>Classroom challenge</b><br>Learn together. Play fairly. Shine brighter.</div></aside>
+<main class="main"><div class="top"><div><div class="crumb">ICT QUEST / <span id="crumb">DASHBOARD</span></div><b id="pageTitle">Welcome back, Explorer!</b></div><div class="topright"><span class="pill">⭐ <b id="xpTop">0</b> XP</span><div class="avatar">IQ</div></div></div><div id="view"></div></main></div>
+<div class="mind-modal" id="mindModal" role="dialog" aria-modal="true" aria-labelledby="mindModalTitle" onclick="if(event.target===this)closeMindMap()">
+ <div class="mind-dialog"><div class="mind-modal-head"><h2 id="mindModalTitle">Lesson mind map</h2><div class="row"><button class="btn ghost small" id="mindZoomBtn" onclick="toggleMindZoom()">🔍 Zoom</button><button class="mind-close" onclick="closeMindMap()" aria-label="Close mind map">×</button></div></div><div class="mind-modal-body" id="mindModalBody"></div></div>
+</div>
+<script>
+const lessons=[
+{
+  unit:1,n:1,
+  title:"Intelligent Systems and Their Impact on Climate Change",
+  icon:"🌍",
+  desc:"Explore how IoT, AI and robotics work together to support our planet.",
+  topics:[
+    ["Internet of Things (IoT)","Connects devices to the internet, collects and transmits real-time environmental and sensor data.","📡","Example: Weather stations and soil moisture sensors."],
+    ["Artificial Intelligence (AI)","Analyzes collected information, recognizes patterns and makes smart predictions or decisions.","🧠","Example: Predicting flood risks or optimizing energy use."],
+    ["Robotics","Performs physical tasks and automated actions based on instructions or AI decisions.","🤖","Example: Automated irrigation valves and cleanup drones."]
+  ],
+  sections:[
+    ["What are interconnected intelligent systems?","When IoT, AI and robotics work together, devices can communicate, analyze information and perform tasks with less constant human intervention. A smart home can connect lighting and air conditioning, use AI to understand a situation and use a robot to clean the floor."],
+    ["Everyday applications","Smart homes connect appliances; school robots answer students; smart farming checks soil moisture and irrigates when needed; voice assistants understand spoken requests; smart cars monitor roads and respond to hazards."],
+    ["Smart systems and climate change","IoT sensors measure environmental conditions, AI analyzes the data and suggests decisions, and robots can carry out physical tasks. Applications include monitoring global warming, measuring air pollution, smart irrigation during drought, flood warnings and monitoring melting ice."]
+  ],
+  cards:[
+    ["🏠","Smart Homes","Connected lighting and climate control save electricity automatically."],
+    ["🌾","Smart Farming","Soil sensors detect dryness and trigger precise irrigation only when needed."],
+    ["🌫️","Air & Ice Monitoring","Satellites and sensors track harmful gases, global warming and melting ice."],
+    ["🌊","Flood Early Warning","AI analyzes rainfall and river levels to alert communities early."]
+  ],
+  challenge:{
+    scenario:"A smart farm uses ground sensors, weather data and automated water sprinklers during a dry summer.",
+    tasks:[
+      ["A","Which technology collects soil moisture readings?"],
+      ["B","Which technology decides the best time and amount to water?"],
+      ["C","Which component physically opens the sprinklers?"],
+      ["D","How does this help protect the environment?"]
+    ],
+    answer:"A: IoT sensors collect the moisture data. B: Artificial Intelligence (AI) analyzes the data and decides. C: Robotics executes the physical watering action. D: It prevents water waste during drought and keeps crops healthy."
+  },
+  mission:["A smart watch collects activity data. Which technology connects it and sends data to an app?",["IoT","Robotics","CSS"],0,"IoT connects devices and collects/transmits data."],
+  mind:["Smart connected systems","IoT: connects & collects","AI: analyzes & decides","Robotics: acts","Smart home","School robot","Smart farming","Climate protection"],
+  questions:[
+    ["Which technology connects devices to the internet and exchanges data?",["AI","Robotics","IoT","VR"],2],
+    ["What is the main role of AI in a smart system?",["Data analysis and decision-making","Device manufacturing","Powering the internet","Only data transfer"],0],
+    ["Which component can automatically irrigate dry soil?",["Social media","Robotics","A spreadsheet","A web browser"],1],
+    ["How can IoT help monitor air pollution?",["By measuring harmful gases","By increasing exhaust","By deleting data","By turning off all devices"],0],
+    ["What do IoT, AI and robotics create when they work together?",["Traditional systems","Manual systems","Interconnected intelligent systems","Offline files"],2]
+  ]
+},
+{
+  unit:1,n:2,
+  title:"Advanced Cyber Threats",
+  icon:"🛡️",
+  desc:"Recognize online threats and learn how to protect personal data.",
+  topics:[
+    ["Ransomware","Malware that encrypts files or locks devices and demands a ransom payment.","🔒","Arrives via suspicious attachments, fake updates or unsafe links."],
+    ["Social Engineering","Tricking people into revealing confidential information or taking unsafe actions.","🎭","Includes Spear Phishing, Pretexting and Baiting."],
+    ["DDoS Attack","Overwhelms an online service with massive traffic so legitimate users cannot access it.","🌊","Uses a network of compromised devices called a botnet."]
+  ],
+  sections:[
+    ["Advanced cyber threats","These are carefully planned attacks that exploit weaknesses in systems, devices or user behavior. They are not limited to simple viruses."],
+    ["Social engineering methods","Spear phishing targets specific people with convincing messages. Pretexting uses a made-up story or identity. Baiting offers something attractive to tempt a person into an unsafe action."],
+    ["Ransomware and DDoS","Ransomware may arrive through suspicious emails, links, websites or untrusted downloads. A DDoS attack uses many compromised devices (a botnet) to overwhelm a website or service. Protect yourself by checking senders and links, keeping software updated, using security tools and asking a trusted adult or teacher when unsure."]
+  ],
+  cards:[
+    ["🎣","Spear Phishing","Targeted messages tailored to a specific student, teacher or organization."],
+    ["🕵️","Pretexting","Creating a believable fake story or role to gain trust and extract data."],
+    ["🎁","Baiting","Offering a free game, prize or download to tempt users into clicking malware."],
+    ["🛡️","Smart Defense","Verify senders, update software, use antivirus tools and ask a trusted adult."]
+  ],
+  challenge:{
+    scenario:"You receive an email claiming you won a free gaming voucher and asking you to download an attachment to claim it.",
+    tasks:[
+      ["A","Which social engineering technique is being used here?"],
+      ["B","What dangerous malware could be hidden inside the attachment?"],
+      ["C","What happens if a website is flooded by thousands of infected devices?"],
+      ["D","Name two safe actions you should take immediately."]
+    ],
+    answer:"A: Baiting (tempting you with a free reward). B: Ransomware or spyware. C: A DDoS attack powered by a botnet. D: Do not click or download the file; verify the sender and report/ask a teacher or trusted adult."
+  },
+  mission:["A message tries to trick you into revealing private information. What idea does this illustrate?",["Social engineering","CSS styling","Data storage"],0,"Social engineering tricks people into revealing information or taking unsafe actions."],
+  mind:["Advanced cyber threats","Malware","Ransomware","Social engineering","Spear phishing","Pretexting","Baiting","DDoS → botnet"],
+  questions:[
+    ["What does ransomware do?",["Organizes files","Encrypts files and demands payment","Improves internet speed","Creates backups"],1],
+    ["What is social engineering?",["Tricking people into revealing information","Repairing hardware","Updating software","Designing a website"],0],
+    ["A targeted phishing message aimed at a specific person is called…",["Baiting","Pretexting","Spear phishing","CSS"],2],
+    ["What is a botnet in a DDoS attack?",["A secure password","A network of compromised devices","A design template","A type of database"],1],
+    ["What is a good way to stay safer online?",["Open every attachment","Share passwords","Ignore updates","Check suspicious messages and links"],3]
+  ]
+},
+{
+  unit:1,n:3,
+  title:"Big Data",
+  icon:"📊",
+  desc:"Discover data sources, the 5Vs and the main types of big data.",
+  topics:[
+    ["Big Data","Large, complex datasets that traditional tools like Excel cannot efficiently process.","📦","Helps organizations make faster, better-informed decisions."],
+    ["The 5Vs","Volume, Velocity, Variety, Veracity and Value define Big Data characteristics.","⚡","Measures size, speed, formats, reliability and usefulness."],
+    ["Three Data Types","Structured (tables), Unstructured (media/text) and Semi-structured (emails/logs).","🗂️","Different formats require modern storage and analysis tools."]
+  ],
+  sections:[
+    ["What is Big Data?","Big data is a collection of large, complex data that cannot be efficiently processed using traditional technology such as Excel. Analysis can help people make better and faster decisions."],
+    ["Sources of Big Data","Sources include internet-connected devices, social media, financial transactions, smart devices, digital content, government records, and geographic or spatial data from satellites and GPS."],
+    ["The 5Vs & Types of Big Data","Volume is amount; Velocity is speed; Variety is formats; Veracity is reliability; Value is usefulness. Structured data sits in tables; Unstructured data includes videos and posts; Semi-structured data combines both, like an email with headers and body text."]
+  ],
+  cards:[
+    ["⌚","IoT & Smart Devices","Smartwatches, phones and GPS satellites continuously generate live data."],
+    ["💬","Social & Digital Media","Posts, likes, videos and watch time create massive unstructured streams."],
+    ["▦","Structured vs Unstructured","Spreadsheets are structured; videos are unstructured; emails are semi-structured."],
+    ["💎","The 5Vs Check","Volume, Velocity, Variety, Veracity and Value turn raw data into insight."]
+  ],
+  challenge:{
+    scenario:"An online store receives thousands of orders, product photos and customer emails every day.",
+    tasks:[
+      ["A","Name two sources of Big Data in this scenario."],
+      ["B","Which V describes the huge number of daily orders?"],
+      ["C","Classify an order table, a product video and a customer email."],
+      ["D","Suggest one decision the store can make using this data."]
+    ],
+    answer:"A: Financial transactions and digital content / social interactions. B: Volume. C: Order table = structured; product video = unstructured; email = semi-structured. D: Restock popular items or personalize recommendations."
+  },
+  mission:["A video uploaded online is which type of data?",["Structured","Unstructured","Only numerical"],1,"Videos are examples of unstructured data."],
+  mind:["BIG DATA","Sources","IoT • Social media","Finance • Smart devices","Government • GPS","5Vs","Volume • Velocity","Variety • Veracity • Value","Types","Structured • Unstructured","Semi-structured"],
+  questions:[
+    ["Which V describes the amount of data?",["Velocity","Volume","Veracity","Value"],1],
+    ["Which is an example of unstructured data?",["A database table","A transaction row","A video","A spreadsheet column"],2],
+    ["What does veracity refer to?",["Data speed","Data usefulness","Data quantity","Data reliability and quality"],3],
+    ["An email is often an example of…",["Semi-structured data","Only structured data","Only numerical data","No data"],0],
+    ["Which is a source of big data?",["GPS devices","Only paper notebooks","A disconnected chair","A blank screen"],0]
+  ]
+},
+{
+  unit:1,n:4,
+  title:"Big Data and Its Relationship to Artificial Intelligence",
+  icon:"🤖",
+  desc:"Follow the data journey and see how AI learns from big data.",
+  topics:[
+    ["Data Processing Pipeline","Collection, storage, cleaning, processing, analysis and information extraction.","🔄","Each stage prepares raw data for accurate AI learning."],
+    ["AI Model Training","Big data provides rich examples to train machine-learning and deep-learning models.","🎓","More clean examples help AI recognize patterns reliably."],
+    ["Smart AI Applications","Computer vision, predictive analytics, hidden patterns and personalization.","🚀","Transforms stored records into smart real-world predictions."]
+  ],
+  sections:[
+    ["How Big Data and AI work together","Big data provides material for AI systems to learn from. AI tools process and analyze large datasets to find patterns and useful information."],
+    ["Stages of Big Data processing","The stages include data collection, data storage, data cleaning, data processing, data analysis and information extraction. Cleaning helps handle errors, duplication and incorrect data."],
+    ["Uses of Big Data in AI","Big data supports machine learning and deep learning, computer vision, predictive analytics, discovering hidden patterns, continuous learning, improving user experience and automating tasks."]
+  ],
+  cards:[
+    ["🧹","Data Cleaning","Removes duplicate, missing or incorrect entries before AI training begins."],
+    ["👁️","Computer Vision","Trains AI to recognize objects and faces using millions of images and videos."],
+    ["🔮","Predictive Analytics","Spots trends in past records to forecast future events or demand."],
+    ["✨","Personalization","Adapts recommendations and user experiences based on behavior patterns."]
+  ],
+  challenge:{
+    scenario:"A medical research team wants an AI system to detect early signs of eye disease from thousands of retinal scans.",
+    tasks:[
+      ["A","Why does the AI model need a large dataset of scans?"],
+      ["B","Which processing stage fixes blurry, corrupted or duplicate records?"],
+      ["C","Which AI capability allows the system to analyze images?"],
+      ["D","How does extracting information help doctors?"]
+    ],
+    answer:"A: Big data gives the AI enough examples to learn accurate patterns. B: Data cleaning. C: Computer vision. D: It highlights early warning patterns so doctors can make faster, better decisions."
+  },
+  mission:["An AI model is learning patterns from a large collection of examples. What does it rely on?",["Big data","A footer","A font"],0,"Big data provides material for AI systems to learn from."],
+  mind:["BIG DATA + AI","Collect","Store","Clean","Process","Analyze","Extract information","Train & improve AI"],
+  questions:[
+    ["Why is big data important to AI?",["It feeds AI with data to learn from","It replaces all computers","It stops analysis","It removes the need for information"],0],
+    ["Which stage deals with errors and duplicate records?",["Collection","Data cleaning","Presentation","Printing"],1],
+    ["Computer vision models learn from large collections of…",["Images and videos","Only passwords","Only sound waves","CSS files"],0],
+    ["Predictive analytics looks for patterns to…",["Delete information","Change fonts","Predict future events","Create HTML tags"],2],
+    ["Which statement is correct?",["AI cannot analyze data","Big data has no role in AI","AI and big data are unrelated","AI helps process and analyze big data"],3]
+  ]
+},
+{
+  unit:2,n:1,
+  title:"Principles of Designing Professional and Attractive Website Interfaces",
+  icon:"🎨",
+  desc:"Plan a website that is clear, useful, attractive and easy to navigate.",
+  topics:[
+    ["Purpose & Audience","Define the website topic and understand who will visit and use it.","🎯","Every design choice starts with user needs."],
+    ["Layout & Navigation","Organize sections logically so visitors find information effortlessly.","🧭","Clear menus and headings prevent confusion."],
+    ["Visual Consistency","Use harmonious colors, readable typography and consistent page styling.","🖌️","Builds trust and makes content pleasant to read."]
+  ],
+  sections:[
+    ["Plan before designing","Decide the website topic, its audience, the pages it needs, its colors and the content you want to include, such as text, images or videos."],
+    ["Professional interface principles","Make the layout clear and organized. Use readable text, suitable colors, consistent elements and useful navigation. Keep the visitor's needs in mind."],
+    ["Improve the experience","Use images and media purposefully, make information easy to find, and review the site with other people. Feedback can help you improve the design."]
+  ],
+  cards:[
+    ["📋","Pre-Design Blueprint","Choose topic, target audience, required pages, color palette and media."],
+    ["🔤","Readability First","High color contrast, clear font sizes and uncluttered spacing."],
+    ["🧭","Intuitive Navigation","Simple menus that let users jump between pages in one click."],
+    ["💬","Test & Refine","Share drafts with classmates or teachers and improve using feedback."]
+  ],
+  challenge:{
+    scenario:"A school club built a website with neon yellow text on a white background, no navigation bar, and five different fonts.",
+    tasks:[
+      ["A","Identify two readability problems on this page."],
+      ["B","What missing element makes moving between pages difficult?"],
+      ["C","Which principle is broken by using five unrelated fonts?"],
+      ["D","How can the club check if their redesign actually works?"]
+    ],
+    answer:"A: Low contrast (yellow on white) and inconsistent font styling. B: Clear navigation menu. C: Visual consistency. D: Review the site with students/teachers and gather user feedback."
+  },
+  mission:["A visitor cannot find the menu. Which design area needs improvement?",["Navigation","Image resolution","File extension"],0,"Clear navigation helps users find what they need."],
+  mind:["PROFESSIONAL WEBSITE","Purpose","Audience","Pages & content","Layout","Navigation","Readable text","Colors & consistency","Review & improve"],
+  questions:[
+    ["What should you identify before designing a website?",["Only the footer color","The topic and target audience","Only the file name","The number of keyboards"],1],
+    ["Why is consistent design useful?",["It makes pages feel organized","It hides content","It prevents navigation","It removes images"],0],
+    ["Which choice improves readability?",["Tiny text","Low contrast","Suitable fonts and colors","Random layout"],2],
+    ["What helps visitors move between pages?",["Navigation","A wallpaper","A spreadsheet","A password"],0],
+    ["What is a useful way to improve a website?",["Never review it","Ignore visitors","Remove all headings","Collect feedback and make changes"],3]
+  ]
+},
+{
+  unit:2,n:2,
+  title:"Web Page Format",
+  icon:"🧩",
+  desc:"Understand CSS, page structure and how HTML connects to styling.",
+  topics:[
+    ["HTML Structure","Defines the semantic content and building blocks of a web page.","🏗️","Headings, paragraphs, links, images and sections."],
+    ["CSS Styling","Controls visual presentation: colors, fonts, spacing and layout.","🎨","Syntax follows selector { property: value; }."],
+    ["External Stylesheet","A dedicated .css file linked inside <head> to style multiple pages.","🔗","Uses <link rel='stylesheet' href='Style.css'>."]
+  ],
+  sections:[
+    ["Why CSS?","HTML describes page content. CSS formats how that content looks, including font color, font size and page color. It can control several pages at once."],
+    ["Benefits of CSS","CSS saves time, makes changes easier, improves appearance and readability, separates design from content and supports responsive pages for computers, tablets and phones."],
+    ["CSS structure and ways to add it","The basic syntax is selector { property: value; }. CSS can be inline, internal or external. External CSS is written in a separate .css file and linked in the HTML head using a link element with rel='stylesheet' and href set to the file name."]
+  ],
+  cards:[
+    ["🧱","HTML vs CSS","HTML builds the structure; CSS dresses and arranges the page."],
+    ["⚙️","CSS Syntax Rule","selector { property: value; } — e.g., h1 { color: navy; }."],
+    ["📂","Three Ways to Add CSS","Inline (tag attribute), Internal (<style>), External (.css file)."],
+    ["📱","Responsive Design","CSS adapts layouts smoothly across desktops, tablets and phones."]
+  ],
+  challenge:{
+    scenario:"You have a 6-page website and want to change the background color and heading font across all pages at once.",
+    tasks:[
+      ["A","Which CSS attachment method should you choose?"],
+      ["B","Where in the HTML document do you place the <link> tag?"],
+      ["C","Write the three parts of a basic CSS rule."],
+      ["D","Name two benefits of separating CSS from HTML."]
+    ],
+    answer:"A: External CSS (.css file). B: Inside the <head> section. C: Selector, property and value: selector { property: value; }. D: Saves time when updating multiple pages and improves readability/responsiveness."
+  },
+  mission:["You want the same style on two HTML pages. Which option is best?",["External CSS","Different inline styles everywhere","A picture file"],0,"An external CSS file can format multiple HTML pages."],
+  mind:["WEB PAGE FORMAT","HTML","Content & structure","CSS","Appearance & layout","Selector","Property","Value","Inline • Internal • External","Responsive pages"],
+  questions:[
+    ["What is CSS mainly used for?",["Formatting web page appearance","Collecting GPS data","Encrypting files","Sending email"],0],
+    ["What is the basic CSS syntax?",["value = selector","selector { property: value; }","HTML / CSS / AI","property: selector"],1],
+    ["Which CSS method uses a separate .css file?",["Inline","Internal","External","None"],2],
+    ["Where is the link to an external stylesheet placed?",["Inside the head element","Only in the footer","In an image","In a spreadsheet"],0],
+    ["Which is a benefit of CSS?",["It removes HTML","It prevents updates","It makes pages offline only","It helps create responsive layouts"],3]
+  ]
+},
+{
+  unit:2,n:3,
+  title:"My Digital Project for My School",
+  icon:"🏫",
+  desc:"Build a simple school website using HTML pages and one CSS file.",
+  topics:[
+    ["Organized Project Folder","Keep School.htm, Student.htm and Style.css together in one folder.","📁","Clean file organization keeps links working reliably."],
+    ["Semantic HTML Blocks","Structure pages with header, div.container, section and footer.","🏛️","Separates page banner, main topics and footer info."],
+    ["Shared External CSS","Format both School.htm and Student.htm with a single Style.css file.","✨","Ensures consistent colors, spacing and typography."]
+  ],
+  sections:[
+    ["Prepare the project","Create a folder named project. Inside it, create School.htm for school data, Student.htm for student data and Style.css for formatting both pages."],
+    ["Build the pages","The school page can include a header, school information, school activities and a footer. The student page can include personal information and contact information. Use HTML elements to organize the content."],
+    ["Format with CSS","The example project uses body, .container, header, section, h2 and footer rules. A shared external stylesheet keeps the two pages visually consistent and easier to update."]
+  ],
+  cards:[
+    ["🏫","School.htm","Displays the school header, general school info, activities and footer."],
+    ["🎓","Student.htm","Presents student profile details and contact information cleanly."],
+    ["🎨","Style.css","Defines body, .container, header, section, h2 and footer styles."],
+    ["🔗","Unified Experience","Linking one stylesheet keeps both pages visually connected."]
+  ],
+  challenge:{
+    scenario:"You created School.htm and Student.htm inside your project folder, and now you want both pages to share the exact same header color and card borders.",
+    tasks:[
+      ["A","What is the name of the shared styling file in the project?"],
+      ["B","Which HTML tag holds the top title banner of each page?"],
+      ["C","Which tag groups related blocks like 'School Activities'?"],
+      ["D","What information usually goes inside the <footer> tag?"]
+    ],
+    answer:"A: Style.css. B: <header>. C: <section>. D: Copyright notice, school year or contact details."
+  },
+  mission:["Which file contains the shared styling in the school project?",["Student.htm","Style.css","School.htm"],1,"Style.css is the shared formatting file."],
+  mind:["SCHOOL DIGITAL PROJECT","project folder","School.htm","Student.htm","Style.css","HTML structure","header • section","footer","CSS styling","Two linked pages"],
+  questions:[
+    ["Which file stores school data page HTML?",["Style.css","School.htm","Student.jpg","Readme.pdf"],1],
+    ["Which file formats both pages?",["Student.htm","School.htm","Style.css","A browser"],2],
+    ["Which element commonly contains the main page heading?",["header","footer","titlebar","spreadsheet"],0],
+    ["What does the footer often contain?",["Only a menu","The browser address","A password","Copyright or contact information"],3],
+    ["Why use one external CSS file for both pages?",["To make styling consistent and easier to update","To delete HTML","To hide the pages","To store student grades"],0]
+  ]
+},
+{
+  unit:2,n:4,
+  title:"Creating Your Website with the Help of Artificial Intelligence",
+  icon:"✨",
+  desc:"Use clear prompts to plan, generate, review and improve a website.",
+  topics:[
+    ["Effective AI Prompt","A clear text instruction describing your website's purpose and structure.","💬","Specific prompts produce far better initial designs."],
+    ["Structured Planning","Define topic, pages, color theme, text/images and target audience first.","🗺️","Planning prevents vague or incomplete AI output."],
+    ["Review, Edit & Safety","Refine AI text/layout, gather feedback and protect personal privacy.","🛡️","Always get teacher and parent approval before publishing."]
+  ],
+  sections:[
+    ["AI website creation","AI tools can make website creation easier without requiring advanced programming experience. A prompt is the text command you give the tool."],
+    ["Plan your prompt","Decide the website topic, the pages you need, preferred colors, content such as text or images, and the expected visitors. Clear, simple prompts help the AI understand your request."],
+    ["Create and improve","The textbook introduces Wegic.ai as an example. Review the generated website, make adjustments to text and design, show it to classmates and use their feedback. Get teacher and parent approval before posting personal information online."]
+  ],
+  cards:[
+    ["✍️","Writing a Strong Prompt","Include topic, page list, preferred colors, content and audience."],
+    ["🤖","AI Builders (Wegic.ai)","Generate a working layout quickly without writing complex code first."],
+    ["🔍","Human Review & Polish","Edit generated text, replace placeholder images and test usability."],
+    ["🔐","Digital Safety Rule","Ask a teacher and parent before sharing personal information online."]
+  ],
+  challenge:{
+    scenario:"You want to use an AI tool like Wegic.ai to build a website for your school science fair.",
+    tasks:[
+      ["A","List four details you should include in your prompt."],
+      ["B","Is the AI-generated draft final, or what should you do next?"],
+      ["C","Who can give helpful feedback to improve your site?"],
+      ["D","What safety step is required before posting personal details?"]
+    ],
+    answer:"A: Website topic, needed pages, preferred colors, and target audience/content. B: Review and edit the text and design. C: Classmates and your teacher. D: Obtain teacher and parent approval."
+  },
+  mission:["What should a clear AI website prompt include?",["Topic, pages and content","Only random words","A password"],0,"A clear prompt describes the website topic, pages and content."],
+  mind:["WEBSITE + AI","Choose topic","Plan pages","Choose colors","Describe content","Write clear prompt","Generate website","Review • Edit","Present • Improve"],
+  questions:[
+    ["What is a prompt?",["A website address","A text instruction to an AI tool","A CSS color","A type of image"],1],
+    ["What should you do first when planning an AI website?",["Define the website topic","Publish personal details","Delete the pages","Choose random text"],0],
+    ["Which tool is given as an example in the lesson?",["Calculator","Paint","Wegic.ai","Notepad"],2],
+    ["After AI creates the basic website, you can…",["Never change it","Delete everything","Stop reviewing","Adjust the text and design"],3],
+    ["What should happen before posting personal information online?",["Get teacher and parent approval","Share it publicly first","Ignore privacy","Use someone else's details"],0]
+  ]
+}
+];
+
+const key='ictQuest_v1';let data=JSON.parse(localStorage.getItem(key)||'{}');data.students??=[];data.scores??={girls:0,boys:0};data.xp??=0;data.done??=[];data.quiz??={};data.attendance??={};
+function save(){localStorage.setItem(key,JSON.stringify(data));document.getElementById('xpTop').textContent=data.xp}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const view=document.getElementById('view');
+let page='home',current=0,tab='learn',slideIdx=0,activeGame=null,gameIndex=0,gameScore=0;
+
+function go(p){
+  page=p;
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));
+  document.getElementById('crumb').textContent=p.toUpperCase();
+  document.getElementById('pageTitle').textContent=({
+    home:'Welcome back, Explorer!',
+    lessons:'Your learning journey',
+    games:'Choose your challenge',
+    teams:'Girls vs Boys',
+    students:'Class participation tracker',
+    mindmaps:'See the big picture'
+  })[p];
+  render();
+}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.page));
+function render(){
+  save();
+  if(page==='home')home();
+  if(page==='lessons')lessonList();
+  if(page==='lesson')lessonPage();
+  if(page==='games')games();
+  if(page==='teams')teams();
+  if(page==='students')students();
+  if(page==='mindmaps')mindmaps();
+}
+
+function home(){
+  let done=data.done.length;
+  view.innerHTML=`<section class="hero"><div class="eyebrow">✨ YOUR CLASSROOM, REIMAGINED</div><h1>Learn it. Play it.<br>Become an ICT hero.</h1><p>Explore technology, solve challenges and collect XP as you master all 8 lessons.</p><button class="btn light" onclick="go('lessons')">Explore lessons&nbsp; →</button></section><div class="stats"><div class="stat"><div class="sico">📚</div><div><strong>8</strong><small>Interactive lessons</small></div></div><div class="stat"><div class="sico">🏅</div><div><strong>${done}/8</strong><small>Lessons completed</small></div></div><div class="stat"><div class="sico">⭐</div><div><strong>${data.xp}</strong><small>XP earned</small></div></div><div class="stat"><div class="sico">🙋</div><div><strong>${data.students.length}</strong><small>Students tracked</small></div></div></div><div class="sectionhead"><div><h2>Continue your adventure</h2><p>Choose a lesson and unlock a new skill.</p></div><button class="btn ghost small" onclick="go('lessons')">View all →</button></div><div class="grid2">${lessons.slice(0,4).map((l,i)=>lessonCard(l,i)).join('')}</div><div class="sectionhead"><div><h2>Ready for a little competition?</h2><p>Bring the whole class into the game.</p></div></div><div class="grid2"><div class="card lesson"><div class="lessonicon">🎮</div><div><h3>Game Arena</h3><p>Quick quiz, true or false, and challenge modes.</p><button class="btn small" onclick="go('games')">Play games</button></div></div><div class="card lesson"><div class="lessonicon">🏆</div><div><h3>Girls vs Boys Battle</h3><p>Keep team scores and crown the classroom champions.</p><button class="btn small" onclick="go('teams')">Open battle</button></div></div></div>`;
+}
+function lessonCard(l,i){
+  let done=data.done.includes(i);
+  return `<div class="card lesson"><div class="lessonicon">${l.icon}</div><div style="flex:1"><span class="tag">UNIT ${l.unit} • LESSON ${l.n}</span>${done?'<span class="tag" style="background:#e8fff5;color:#13865f">COMPLETED ✓</span>':''}<h3>${esc(l.title)}</h3><p>${esc(l.desc)}</p><div class="row"><button class="btn small" onclick="openLesson(${i})">Open lesson →</button><span class="muted" style="font-size:11px">Interactive slides + quiz</span></div></div></div>`;
+}
+function lessonList(){
+  view.innerHTML=`<div class="hero"><div class="eyebrow">THE ICT SYLLABUS</div><h1>Eight lessons.<br>Endless discoveries.</h1><p>Learn the key ideas slide by slide, explore a mind map and test your knowledge after every lesson.</p></div><div class="sectionhead"><div><h2>Unit One · AI & Digital Data</h2><p>Artificial Intelligence and Protecting Our Digital Data</p></div></div><div class="grid2">${lessons.map((l,i)=>l.unit===1?lessonCard(l,i):'').join('')}</div><div class="sectionhead"><div><h2>Unit Two · Website Design</h2><p>Website Design and Creation</p></div></div><div class="grid2">${lessons.map((l,i)=>l.unit===2?lessonCard(l,i):'').join('')}</div>`;
+}
+function openLesson(i){
+  current=i;page='lesson';tab='learn';slideIdx=0;
+  document.getElementById('crumb').textContent='LESSON';
+  document.getElementById('pageTitle').textContent='Lesson '+(i+1);
+  render();
+}
+
+function wrapMmText(str, maxChars=24){
+  const words = String(str||'').trim().split(/\s+/).filter(Boolean);
+  if(!words.length) return [''];
+  const lines = [];
+  let line = '';
+  for(const w of words){
+    const test = line ? (line + ' ' + w) : w;
+    if(test.length <= maxChars){
+      line = test;
+    } else {
+      if(line) lines.push(line);
+      line = w;
+    }
+  }
+  if(line) lines.push(line);
+  return lines;
+}
+
+function makeMindMap(items, lessonObj=null){
+  const arr = Array.isArray(items) && items.length ? items : ['Main Topic'];
+  const root = arr[0];
+  const rest = arr.slice(1);
+
+  const bChunks = [[], [], []];
+  rest.forEach((txt, i) => bChunks[i % 3].push(txt));
+
+  const mainColors = [
+    {fill:'#e6defd', stroke:'#232129'},
+    {fill:'#fff0b8', stroke:'#232129'},
+    {fill:'#fad2e1', stroke:'#232129'}
+  ];
+  const leafPalette = [
+    '#d8f3dc',
+    '#dbeafe',
+    '#fde2e4',
+    '#ede9fe',
+    '#fef3c7',
+    '#cffafe'
+  ];
+
+  const branches = [0,1,2].map(bi => {
+    const raw = bChunks[bi];
+    const title = raw[0] || ('Branch ' + (bi+1));
+    let subs = raw.slice(1);
+    if(subs.length > 3){
+      const extra = subs.slice(2).join(' • ');
+      subs = [subs[0], subs[1], extra];
+    }
+    while(subs.length < 3){
+      subs.push(lessonObj ? `${lessonObj.title.split(' ').slice(0,3).join(' ')} (${subs.length+1})` : `Key point ${subs.length+1}`);
+    }
+    return {
+      title,
+      subs,
+      style: mainColors[bi]
+    };
+  });
+
+  const W = 960;
+  const topBannerH = 62;
+  const topBannerY = 20;
+  const topBannerX = 110;
+  const topBannerW = 720;
+
+  const leftBoxX = 24;
+  const leftBoxW = 195;
+  const leftBoxH = 92;
+
+  const midBoxX = 285;
+  const midBoxW = 215;
+  const midBoxH = 132;
+
+  const leafX = 565;
+  const leafW = 355;
+  const leafH = 52;
+  const leafGap = 12;
+
+  const blockSpan = 3 * leafH + 2 * leafGap;
+  const startBlockY = 112;
+  const blockStepY = 212;
+  const H = startBlockY + 2 * blockStepY + blockSpan + 46;
+  const leftBoxY = Math.round(H * 0.44);
+
+  const renderLines = (lines, x, y, lineH, cls='mm-ref-sub', size=12.5, anchor='start') => {
+    const totalH = (lines.length - 1) * lineH;
+    const firstY = y - totalH / 2 + 4;
+    return lines.map((ln, idx) =>
+      `<text x="${x}" y="${firstY + idx * lineH}" class="${cls}" font-size="${size}" text-anchor="${anchor}">${esc(ln)}</text>`
+    ).join('');
+  };
+
+  const bannerLines = wrapMmText((lessonObj ? lessonObj.icon + ' ' : '') + root, 56);
+  const rootLines = wrapMmText(root, 18);
+
+  const midLeftX = leftBoxX + leftBoxW;
+  const midLeftY = leftBoxY + leftBoxH / 2;
+
+  let paths = '';
+  let branchEls = '';
+
+  branches.forEach((br, bi) => {
+    const by = startBlockY + bi * blockStepY;
+    const midY = by + blockSpan / 2;
+    const mBoxY = by + (blockSpan - midBoxH) / 2;
+
+    paths += `<path d="M ${midLeftX} ${midLeftY} L ${midLeftX + 26} ${midLeftY} L ${midLeftX + 26} ${mBoxY + midBoxH/2} Q ${midLeftX + 26} ${mBoxY + midBoxH/2} ${midBoxX} ${mBoxY + midBoxH/2}" fill="none" stroke="#232129" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+    const bRightX = midBoxX + midBoxW;
+    const bracketX = leafX - 34;
+    const y0 = by + leafH / 2;
+    const y1 = by + leafH + leafGap + leafH / 2;
+    const y2 = by + 2 * (leafH + leafGap) + leafH / 2;
+
+    paths += `
+      <path d="M ${bRightX} ${midY} L ${bracketX - 10} ${midY}" fill="none" stroke="#232129" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M ${bracketX - 10} ${y0} Q ${bracketX} ${y0} ${bracketX} ${y0 + 14} L ${bracketX} ${midY - 12} Q ${bracketX} ${midY} ${bracketX + 10} ${midY} Q ${bracketX} ${midY} ${bracketX} ${midY + 12} L ${bracketX} ${y2 - 14} Q ${bracketX} ${y2} ${bracketX - 10} ${y2}" fill="none" stroke="#232129" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M ${bracketX - 10} ${y0} L ${leafX} ${y0}" fill="none" stroke="#232129" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M ${bracketX} ${y1} L ${leafX} ${y1}" fill="none" stroke="#232129" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M ${bracketX - 10} ${y2} L ${leafX} ${y2}" fill="none" stroke="#232129" stroke-width="2.2" stroke-linecap="round"/>
+    `;
+
+    const mTitleLines = wrapMmText(br.title, 18);
+    branchEls += `
+      <g>
+        <rect x="${midBoxX}" y="${mBoxY}" width="${midBoxW}" height="${midBoxH}" rx="16" fill="${br.style.fill}" stroke="#232129" stroke-width="2.4"/>
+        ${renderLines(mTitleLines, midBoxX + midBoxW/2, mBoxY + midBoxH/2, 18, 'mm-ref-title', 14.5, 'middle')}
+      </g>
+    `;
+
+    br.subs.forEach((subTxt, si) => {
+      const sy = by + si * (leafH + leafGap);
+      const col = leafPalette[(bi * 3 + si) % leafPalette.length];
+      const subLines = wrapMmText(subTxt, 38);
+      branchEls += `
+        <g>
+          <rect x="${leafX}" y="${sy}" width="${leafW}" height="${leafH}" rx="13" fill="${col}" stroke="#232129" stroke-width="2.1"/>
+          ${renderLines(subLines, leafX + 14, sy + leafH/2, 15, 'mm-ref-sub', 12.5, 'start')}
+        </g>
+      `;
+    });
+  });
+
+  const doodles = `
+    <path d="M 892 18 L 896 34 L 912 38 L 896 42 L 892 58 L 888 42 L 872 38 L 888 34 Z" fill="#232129"/>
+    <circle cx="834" cy="30" r="3.5" fill="#232129"/>
+    <circle cx="870" cy="68" r="3" fill="#232129"/>
+
+    <path d="M 106 82 C 62 96, 74 148, 128 134 C 158 126, 156 102, 128 104 C 82 108, 36 142, 86 190" fill="none" stroke="#232129" stroke-width="2.8" stroke-linecap="round"/>
+    <path d="M 56 190 L 87 191 L 84 160" fill="none" stroke="#232129" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(248, 286)">
+      <path d="M 0 12 C -12 0, -24 10, -12 24 L 0 36 L 12 24 C 24 10, 12 0, 0 12 Z" fill="none" stroke="#232129" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="0" y1="-6" x2="0" y2="2" stroke="#232129" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="-24" y1="4" x2="-18" y2="9" stroke="#232129" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="24" y1="4" x2="18" y2="9" stroke="#232129" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="-32" y1="22" x2="-24" y2="22" stroke="#232129" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="32" y1="22" x2="24" y2="22" stroke="#232129" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(245, 520)">
+      <path d="M -22 -12 C -27 -18, -34 -12, -27 -4 L -22 1 L -17 -4 C -10 -12, -17 -18, -22 -12 Z" fill="none" stroke="#232129" stroke-width="2.1"/>
+      <path d="M 16 -12 C 11 -18, 4 -12, 11 -4 L 16 1 L 21 -4 C 28 -12, 21 -18, 16 -12 Z" fill="none" stroke="#232129" stroke-width="2.1"/>
+      <path d="M -34 10 C -22 28, 16 28, 28 8" fill="none" stroke="#232129" stroke-width="2.6" stroke-linecap="round"/>
+    </g>
+
+    <path d="M 76 ${H-38} L 80 ${H-25} L 93 ${H-21} L 80 ${H-17} L 76 ${H-4} L 72 ${H-17} L 59 ${H-21} L 72 ${H-25} Z" fill="#232129"/>
+    <path d="M 122 ${H-52} L 125 ${H-42} L 135 ${H-39} L 125 ${H-36} L 122 ${H-26} L 119 ${H-36} L 109 ${H-39} L 119 ${H-42} Z" fill="#232129"/>
+  `;
+
+  return `
+  <div class="mindmap-wrap">
+    <div class="mm-ref-stage">
+      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(root)} Mind Map">
+        <rect x="${topBannerX}" y="${topBannerY}" width="${topBannerW}" height="${topBannerH}" rx="15" fill="#fff0b8" stroke="#232129" stroke-width="2.4"/>
+        ${renderLines(bannerLines, topBannerX + topBannerW/2, topBannerY + topBannerH/2, 18, 'mm-ref-title', 16, 'middle')}
+
+        ${paths}
+
+        <rect x="${leftBoxX}" y="${leftBoxY}" width="${leftBoxW}" height="${leftBoxH}" rx="14" fill="#d8f3dc" stroke="#232129" stroke-width="2.4"/>
+        ${renderLines(rootLines, leftBoxX + leftBoxW/2, leftBoxY + leftBoxH/2, 17, 'mm-ref-title', 13.5, 'middle')}
+
+        ${branchEls}
+        ${doodles}
+      </svg>
+    </div>
+  </div>`;
+}
+
+function openMindMap(i=current){
+ const idx = Math.max(0, Math.min(lessons.length - 1, Number(i) || 0));
+ const l = lessons[idx];
+ const modal = document.getElementById('mindModal');
+ if(!modal || !l) return;
+ const titleEl = document.getElementById('mindModalTitle');
+ const bodyEl = document.getElementById('mindModalBody');
+ if(titleEl) titleEl.textContent = `${l.icon} ${l.title} — Mind Map`;
+ if(bodyEl) bodyEl.innerHTML = makeMindMap(l.mind, l);
+ modal.classList.add('open');
+ document.body.style.overflow = 'hidden';
+}
+
+function toggleMindZoom(){
+  const dlg = document.querySelector('#mindModal .mind-dialog');
+  const btn = document.getElementById('mindZoomBtn');
+  if(!dlg) return;
+  dlg.classList.toggle('zoomed');
+  if(btn) btn.textContent = dlg.classList.contains('zoomed') ? '🔎 Reset Zoom' : '🔍 Zoom';
+}
+
+function closeMindMap(){document.getElementById('mindModal').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeMindMap();
+  if(page==='lesson'&&tab==='learn'&&!document.getElementById('mindModal').classList.contains('open')){
+    if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();moveSlide(1)}
+    if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();moveSlide(-1)}
+    if(e.key.toLowerCase()==='f'){toggleDeckFull()}
+  }
+});
+
+function buildLessonDeck(l){
+  const totalSlides = 8;
+  const s1 = l.sections[0], s2 = l.sections[1], s3 = l.sections[2];
+  const f1 = (s1[1].match(/[^.!?]+[.!?]?/g)||[s1[1]])[0].trim();
+  const f3 = (s3[1].match(/[^.!?]+[.!?]?/g)||[s3[1]])[0].trim();
+  const m = l.mission;
+
+  const gridCls5 = (current % 2 === 1) ? 'addie-grid three' : 'addie-grid';
+  return `
+  <div class="slide-stage" id="lessonDeckStage" data-lesson-theme="${current}">
+    <div class="deck-topbar">
+      <span>← → NAVIGATE &nbsp;•&nbsp; F FULLSCREEN &nbsp;•&nbsp; CLICK CARDS TO EXPLORE</span>
+      <div class="deck-dots">${Array.from({length:totalSlides},(_,k)=>`<button class="deck-dot ${k===0?'active':''}" onclick="goSlide(${k})" aria-label="Slide ${k+1}"></button>`).join('')}</div>
+    </div>
+
+    <section class="addie-slide hero-slide active">
+      <div class="addie-content">
+        <div>
+          <div class="addie-kicker">Unit ${l.unit} · Lesson ${l.n}</div>
+          <h1>${esc(l.title)}<span style="color:#aef4e2">.</span></h1>
+          <p class="addie-lead">${esc(l.desc)}</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+            <span class="addie-pill">✦ Interactive Deck</span>
+            <span class="addie-pill">${l.topics.length} Core Concepts</span>
+            <span class="addie-pill">Mini Check & Activity</span>
+          </div>
+        </div>
+      </div>
+      <div class="addie-hero-art"><div class="addie-orbit"></div><div class="addie-core">${l.icon}</div></div>
+      <div class="addie-footer"><span>ICT QUEST • UNIT ${l.unit} LESSON ${l.n}</span><span>01 / 0${totalSlides}</span></div>
+    </section>
+
+    <section class="addie-slide">
+      <div class="addie-content">
+        <div>
+          <div class="addie-kicker">Lesson Roadmap</div>
+          <h2>What You Will Master Today</h2>
+          <p class="addie-lead">Follow the four stages below to understand the core concepts, applications, and active challenge.</p>
+          <div class="addie-steps">
+            <div class="addie-step selected" onclick="pickRoadmap(this,0)"><div class="letter">01</div><strong>Core Concepts</strong><small>Key definitions</small></div>
+            <div class="addie-step" onclick="pickRoadmap(this,1)"><div class="letter">02</div><strong>Deep Dive</strong><small>How it works</small></div>
+            <div class="addie-step" onclick="pickRoadmap(this,2)"><div class="letter">03</div><strong>Real World</strong><small>Practical uses</small></div>
+            <div class="addie-step" onclick="pickRoadmap(this,3)"><div class="letter">04</div><strong>Think & Share</strong><small>Partner challenge</small></div>
+          </div>
+          <div class="addie-callout" id="roadmapDetail"><strong>Step 01 · Core Concepts:</strong> Build a clear foundation using the ${l.topics.length} essential concepts of this lesson.</div>
+        </div>
+      </div>
+      <div class="addie-footer"><span>LESSON ROADMAP</span><span>02 / 0${totalSlides}</span></div>
+    </section>
+
+    <section class="addie-slide">
+      <div class="addie-content">
+        <div>
+          <div class="addie-kicker">Core Concepts · Tap to Explore</div>
+          <h2>Key Building Blocks</h2>
+          <div class="addie-grid three">
+            ${l.topics.map((t,idx)=>`
+              <div class="addie-card concept-tap ${idx===0?'selected':''}" tabindex="0"
+                   onclick="selectConceptCard(this,${idx})">
+                <div class="addie-icon">${t[2]||'💡'}</div>
+                <h3 class="concept-title-${idx%3}">0${idx+1} · ${esc(t[0])}</h3>
+                <p>${esc(t[1])}</p>
+                <span class="tap-hint">Tap for example ↗</span>
+              </div>
+            `).join('')}
+          </div>
+          <div class="addie-callout" id="conceptDetail"><strong>${esc(l.topics[0][0])}:</strong> ${esc(l.topics[0][3]||l.topics[0][1])}</div>
+        </div>
+      </div>
+      <div class="addie-footer"><span>CORE CONCEPTS</span><span>03 / 0${totalSlides}</span></div>
+    </section>
+
+    <section class="addie-slide">
+      <div class="addie-content">
+        <div>
+          <div class="addie-kicker">Lesson Content · Part 01</div>
+          <h2>${esc(s1[0])}</h2>
+          <p class="addie-lead">${esc(s1[1])}</p>
+          <div class="addie-grid">
+            <div class="addie-card">
+              <div class="addie-icon">📌</div>
+              <h3>Main Idea</h3>
+              <p>${esc(f1)}</p>
+            </div>
+            <div class="addie-card">
+              <div class="addie-icon">🔗</div>
+              <h3>Why It Matters</h3>
+              <p>Understanding this foundation helps you connect theory to practical digital tools and everyday technology.</p>
+            </div>
+          </div>
+          <div class="addie-callout"><strong>Remember:</strong> ${esc(f1)}</div>
+        </div>
+      </div>
+      <div class="addie-footer"><span>PART 01 • FOUNDATION</span><span>04 / 0${totalSlides}</span></div>
+    </section>
+
+    <section class="addie-slide">
+      <div class="addie-content">
+        <div>
+          <div class="addie-kicker">Lesson Content · Part 02</div>
+          <h2>${esc(s2[0])}</h2>
+          <p style="margin-bottom:12px">${esc(s2[1])}</p>
+          <div class="${gridCls5}">
+            ${l.cards.map(c=>`
+              <div class="addie-card">
+                <div class="addie-icon">${c[0]}</div>
+                <h3>${esc(c[1])}</h3>
+                <p>${esc(c[2])}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="addie-footer"><span>PART 02 • APPLICATIONS & DETAILS</span><span>05 / 0${totalSlides}</span></div>
+    </section>
+
+    <section class="addie-slide">
+      <div class="addie-content">
+        <div>
+          <div class="addie-kicker">Lesson Content · Part 03</div>
+          <h2>${esc(s3[0])}</h2>
+          <p class="addie-lead">${esc(s3[1])}</p>
+          <div class="addie-list">
+            ${l.sections.map((sec,k)=>`
+              <div class="addie-list-item">
+                <div class="addie-dot">${k+1}</div>
+                <p><strong>${esc(sec[0])}:</strong> ${esc((sec[1].match(/[^.!?]+[.!?]?/g)||[sec[1]])[0].trim())}</p>
+              </div>
+            `).join('')}
+          </div>
+          <div class="addie-callout"><strong>Key Takeaway:</strong> ${esc(f3)}</div>
+        </div>
+      </div>
+      <div class="addie-footer"><span>PART 03 • KEY INSIGHTS</span><span>06 / 0${totalSlides}</span></div>
+    </section>
+
+    <section class="addie-slide">
+      <div class="addie-content">
+        <div>
+          <div class="addie-kicker">Active Learning · Mini Challenge</div>
+          <h2>Think. Discuss. Share.</h2>
+          <p class="addie-lead">${esc(l.challenge.scenario)}</p>
+          <div class="addie-grid">
+            <div class="addie-card">
+              <h3>Discuss with a partner</h3>
+              <div class="addie-list">
+                ${l.challenge.tasks.map(t=>`
+                  <div class="addie-list-item">
+                    <div class="addie-dot">${esc(t[0])}</div>
+                    <p>${esc(t[1])}</p>
+                  </div>
+                `).join('')}
+              </div>
+              <button class="addie-reveal" onclick="toggleChallengeAns(this)">Reveal sample answers +</button>
+              <div class="addie-answer" id="slideChallengeAns">${esc(l.challenge.answer)}</div>
+            </div>
+            <div class="addie-card" style="background:linear-gradient(145deg,#eee8ff,#e7f8f2);display:flex;flex-direction:column;justify-content:space-between">
+              <div>
+                <div style="font-size:44px;margin-bottom:8px">🧩</div>
+                <h3>Quick Concept Check</h3>
+                <p style="color:#383659;font-weight:600">${esc(m[0])}</p>
+                <div id="slideMissionOpts">
+                  ${m[1].map((opt,j)=>`<button class="addie-choice" onclick="answerSlideMission(${j},this)">${String.fromCharCode(65+j)}. ${esc(opt)}</button>`).join('')}
+                </div>
+                <div id="slideMissionFb" style="font-size:13px;font-weight:800;margin-top:8px;color:#315d56"></div>
+              </div>
+              <span class="addie-pill" style="margin-top:10px">Collaborative learning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="addie-footer"><span>ACTIVE LEARNING CHALLENGE</span><span>07 / 0${totalSlides}</span></div>
+    </section>
+
+    <section class="addie-slide end-slide">
+      <div class="addie-content">
+        <div class="addie-kicker">Lesson Complete · Key Takeaways</div>
+        <h1>Great Job<span style="color:#aef4e2">!</span></h1>
+        <p class="addie-lead" style="margin:0 auto 18px">${esc(l.desc)}</p>
+        <div class="addie-grid three" style="width:100%;max-width:920px;margin:0 auto">
+          ${l.topics.map(t=>`
+            <div class="addie-card">
+              <h3>${t[2]||'✦'} ${esc(t[0])}</h3>
+              <p>${esc(t[1])}</p>
+            </div>
+          `).join('')}
+        </div>
+        <div class="row" style="justify-content:center;margin-top:22px">
+          <button class="btn light" onclick="openMindMap(${current})">🧠 Open Visual Mind Map</button>
+          <button class="btn" style="background:#36bfa5;color:#112b26" onclick="setTab('quiz')">✍️ Start 5-Question Quiz →</button>
+        </div>
+      </div>
+      <div class="addie-footer"><span>ICT QUEST • LESSON SUMMARY</span><span>08 / 0${totalSlides}</span></div>
+    </section>
+
+    <div class="deck-controls">
+      <button id="slidePrev" onclick="moveSlide(-1)" aria-label="Previous slide">‹</button>
+      <span class="deck-counter" id="slideCounter">1 / ${totalSlides}</span>
+      <button id="slideNext" onclick="moveSlide(1)" aria-label="Next slide">›</button>
+      <button onclick="toggleDeckFull()" title="Fullscreen" aria-label="Fullscreen" style="font-size:14px">⛶</button>
+    </div>
+    <div class="deck-progress" id="slideProgress" style="width:${100/totalSlides}%"></div>
+  </div>`;
+}
+
+function goSlide(n){
+  const stage=document.getElementById('lessonDeckStage');
+  if(!stage)return;
+  const slides=[...stage.querySelectorAll('.addie-slide')];
+  const dots=[...stage.querySelectorAll('.deck-dot')];
+  slideIdx=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,i)=>s.classList.toggle('active',i===slideIdx));
+  dots.forEach((d,i)=>d.classList.toggle('active',i===slideIdx));
+  const c=document.getElementById('slideCounter'),p=document.getElementById('slideProgress'),pr=document.getElementById('slidePrev'),nx=document.getElementById('slideNext');
+  if(c)c.textContent=`${slideIdx+1} / ${slides.length}`;
+  if(p)p.style.width=`${(slideIdx+1)/slides.length*100}%`;
+  if(pr)pr.disabled=slideIdx===0;
+  if(nx)nx.disabled=slideIdx===slides.length-1;
+}
+function moveSlide(delta){goSlide(slideIdx+delta)}
+function toggleDeckFull(){
+  const stage=document.getElementById('lessonDeckStage');
+  if(!stage)return;
+  if(!document.fullscreenElement)stage.requestFullscreen?.();
+  else document.exitFullscreen?.();
+}
+function pickRoadmap(el,idx){
+  const l=lessons[current];
+  el.parentElement.querySelectorAll('.addie-step').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  const msgs=[
+    `<strong>Step 01 · Core Concepts:</strong> Build a clear foundation using the ${l.topics.length} essential concepts of this lesson.`,
+    `<strong>Step 02 · Deep Dive:</strong> Explore ${esc(l.sections[0][0])} and ${esc(l.sections[1][0])}.`,
+    `<strong>Step 03 · Real World:</strong> Connect ideas to practical examples like ${esc(l.cards[0][1])} and ${esc(l.cards[1][1])}.`,
+    `<strong>Step 04 · Think & Share:</strong> Solve a real classroom scenario with a partner before taking the quiz.`
+  ];
+  document.getElementById('roadmapDetail').innerHTML=msgs[idx];
+}
+function selectConceptCard(el,idx){
+  const t=lessons[current].topics[idx];
+  el.parentElement.querySelectorAll('.concept-tap').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('conceptDetail').innerHTML=`<strong>${esc(t[0])}:</strong> ${esc(t[1])} <em>${esc(t[3]||'')}</em>`;
+}
+function toggleChallengeAns(btn){
+  const ans=document.getElementById('slideChallengeAns');
+  ans.classList.toggle('show');
+  btn.textContent=ans.classList.contains('show')?'Hide sample answers −':'Reveal sample answers +';
+}
+function answerSlideMission(j,btn){
+  const m=lessons[current].mission;
+  const btns=[...document.querySelectorAll('#slideMissionOpts .addie-choice')];
+  btns.forEach((b,k)=>{b.disabled=true;if(k===m[2])b.classList.add('correct')});
+  if(j!==m[2])btn.classList.add('wrong');
+  document.getElementById('slideMissionFb').textContent=(j===m[2]?'🌟 Correct! ':'💡 Not quite. ')+m[3];
+}
+
+function lessonPage(){
+  let l=lessons[current];
+  view.innerHTML=`<div class="lessonhead"><div class="lessonhead-copy"><span class="tag" style="background:#ffffff25;color:white">UNIT ${l.unit} • LESSON ${l.n}</span><h1>${l.icon} ${esc(l.title)}</h1><p>${esc(l.desc)}</p></div><button class="lesson-map-shortcut" onclick="openMindMap(${current})" aria-label="Open full mind map"><span style="font-size:23px">🧠</span><span>View Mind Map</span><span>↗</span></button></div><div class="tabs"><button class="${tab==='learn'?'active':''}" onclick="setTab('learn')">🖥️ Interactive Slides</button><button class="${tab==='mind'?'active':''}" onclick="setTab('mind')">🧠 Mind map</button><button class="${tab==='quiz'?'active':''}" onclick="setTab('quiz')">✍️ Lesson quiz</button><button class="${tab==='games'?'active':''}" onclick="setTab('games')">🎮 Play this lesson</button></div><div id="lessonContent" class="content"></div>`;
+  let c=document.getElementById('lessonContent');
+  if(tab==='learn'){
+    c.innerHTML=buildLessonDeck(l);
+    goSlide(slideIdx);
+  }
+  if(tab==='mind')c.innerHTML=`<div class="card"><div class="mind-launch"><div class="mind-launch-icon">🧠</div><div style="flex:1"><span class="tag">VISUAL SUMMARY</span><h2 style="margin:6px 0">Your mind map is ready</h2><p style="margin:0">Open the full-screen mind map or inspect the complete branch overview below.</p><button class="btn" style="margin-top:13px" onclick="openMindMap(${current})">🗺️ Open full-screen mind map</button></div></div><div style="margin-top:16px">${makeMindMap(l.mind, l)}</div><button class="btn ghost" style="margin-top:14px" onclick="setTab('quiz')">I'm ready for the quiz →</button></div>`;
+  if(tab==='quiz')c.innerHTML=quizHTML(l.questions,'lesson');
+  if(tab==='games')c.innerHTML=`<div class="gamegrid">${gameCardsForLesson()}</div>`;
+}
+function setTab(t){tab=t;lessonPage()}
+
+function quizHTML(qs,kind){return `<div class="card"><h2>✍️ Knowledge check</h2><p>Choose the best answer for each question. You will see your score when you submit.</p><form id="quizForm">${qs.map((q,i)=>`<div class="quizq"><h3>${i+1}. ${esc(q[0])}</h3>${q[1].map((o,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}"> ${String.fromCharCode(65+j)}. ${esc(o)}</label>`).join('')}</div>`).join('')}<button class="btn" type="submit">Submit answers</button></form><div id="quizResult"></div></div>`}
+document.addEventListener('submit',e=>{if(e.target.id!=='quizForm')return;e.preventDefault();let l=lessons[current],qs=l.questions,score=0;qs.forEach((q,i)=>{let a=e.target.querySelector(`input[name=q${i}]:checked`);if(a&&+a.value===q[2])score++});let id=current,first=!data.done.includes(id);if(first){data.done.push(id);data.xp+=score*10+10}else data.xp+=score*5;data.quiz[id]=score;save();document.getElementById('quizResult').innerHTML=`<div class="notice" style="background:#eafff5;border-color:#bdebd8;color:#12694f"><b>🎉 You scored ${score}/${qs.length}!</b><br>${score===qs.length?'Perfect score! You are an ICT superstar.':'Great effort! Review the lesson and try again to improve.'}<br><button class="btn small" style="margin-top:10px" onclick="go('lessons')">Back to lessons</button></div>`;});
+function gameCardsForLesson(){return `<div class="gamecard" onclick="startGame('quiz')"><div class="big">⚡</div><h3>Speed Quiz</h3><p>Answer lesson questions and earn points.</p></div><div class="gamecard" onclick="startGame('truefalse')"><div class="big">✅</div><h3>True or False</h3><p>Decide if each statement is correct.</p></div><div class="gamecard" onclick="startGame('challenge')"><div class="big">🎯</div><h3>Challenge Round</h3><p>Try a mixed question challenge.</p></div>`}
+function games(){view.innerHTML=`<div class="hero"><div class="eyebrow">POWER UP YOUR KNOWLEDGE</div><h1>Welcome to the<br>Game Arena! 🎮</h1><p>Pick a game, challenge yourself and collect XP. Every game is a new chance to shine.</p></div><div class="sectionhead"><div><h2>Choose your game mode</h2><p>Play from any of the eight lessons.</p></div></div><div class="gamegrid"><div class="gamecard" onclick="startGame('quiz')"><div class="big">⚡</div><h3>Speed Quiz</h3><p>Multiple-choice questions against the clock (no timer needed).</p></div><div class="gamecard" onclick="startGame('truefalse')"><div class="big">✅</div><h3>True or False</h3><p>Quickly decide whether a statement is correct.</p></div><div class="gamecard" onclick="startGame('challenge')"><div class="big">🎯</div><h3>Mixed Challenge</h3><p>Questions from all eight lessons.</p></div><div class="gamecard" onclick="go('teams')"><div class="big">👑</div><h3>Girls vs Boys</h3><p>Two teams. One classroom champion.</p></div><div class="gamecard" onclick="go('mindmaps')"><div class="big">🧠</div><h3>Mind Map Match</h3><p>Review the key ideas and connections.</p></div><div class="gamecard" onclick="go('students')"><div class="big">🌟</div><h3>Participation Stars</h3><p>Celebrate students who contribute.</p></div></div><div id="gameArea"></div>`}
+function startGame(type){activeGame=type;gameIndex=0;gameScore=0;let pool=type==='challenge'?lessons.flatMap((l,li)=>l.questions.map(q=>({q,li}))):lessons[current]?.questions.map(q=>({q,li:current}))||lessons[0].questions.map(q=>({q,li:0}));if(type==='truefalse')pool=pool.map(x=>{let truth=Math.random()>.35,idx=truth?x.q[2]:(x.q[2]+1)%x.q[1].length;return {...x,tf:true,tfTruth:truth,q:[`Is this statement true? “${x.q[1][idx]}”`,['True','False'],truth?0:1]}});window.gamePool=pool.sort(()=>Math.random()-.5).slice(0,5);showGameQuestion()}
+function showGameQuestion(){let area=document.getElementById('gameArea');if(!area){area=document.createElement('div');area.id='gameArea';view.append(area)}if(gameIndex>=window.gamePool.length){data.xp+=gameScore*5;save();area.innerHTML=`<div class="gamebox"><h2>🏁 Challenge complete!</h2><p>You earned <b>${gameScore} / ${window.gamePool.length}</b> correct answers and ${gameScore*5} XP.</p><button class="btn" onclick="startGame('${activeGame}')">Play again</button> <button class="btn ghost" onclick="go('games')">Game menu</button></div>`;return}let item=window.gamePool[gameIndex],q=item.q;area.innerHTML=`<div class="gamebox"><div class="row" style="justify-content:space-between"><span class="tag">QUESTION ${gameIndex+1} OF ${window.gamePool.length}</span><b>⭐ ${gameScore} points</b></div><div class="progress"><i style="width:${gameIndex/window.gamePool.length*100}%"></i></div><h2>${esc(q[0])}</h2>${(item.tf?['True','False']:q[1]).map((o,j)=>`<button class="option" style="width:100%;text-align:left" onclick="answerGame(${j})">${item.tf?esc(o):String.fromCharCode(65+j)+'. '+esc(o)}</button>`).join('')}<div id="gameFeedback"></div></div>`}
+function answerGame(j){let item=window.gamePool[gameIndex],correct=item.tf?(j===0)===item.tfTruth:j===item.q[2];if(correct)gameScore++;document.getElementById('gameFeedback').innerHTML=`<p class="feedback" style="color:${correct?'#13956c':'#c05b4c'}">${correct?'Correct! 🌟':'Not quite — keep learning!'}</p><button class="btn small" onclick="gameIndex++;showGameQuestion()">Next question →</button>`;document.querySelectorAll('#gameArea .option').forEach(b=>b.disabled=true)}
+function teams(){view.innerHTML=`<div class="hero"><div class="eyebrow">CLASSROOM SHOWDOWN</div><h1>Girls vs Boys 🏆</h1><p>Choose a team, answer a question and award a point for every correct answer. Keep the competition friendly!</p></div><div class="scoreboard" style="margin-top:18px"><div class="team girls"><div>💗 GIRLS TEAM</div><strong>${data.scores.girls}</strong><button onclick="changeScore('girls',1)">+ Add point</button><button onclick="changeScore('girls',-1)">− Undo</button></div><div class="team boys"><div>💙 BOYS TEAM</div><strong>${data.scores.boys}</strong><button onclick="changeScore('boys',1)">+ Add point</button><button onclick="changeScore('boys',-1)">− Undo</button></div></div><div class="gamebox"><h2>🎲 Battle question</h2><p id="battleQ">Press the button to get a question for both teams.</p><div id="battleOptions"></div><div class="row"><button class="btn" onclick="newBattle()">New question</button><button class="btn ghost" onclick="resetScores()">Reset scores</button></div></div><div class="notice">🏅 ${data.scores.girls===data.scores.boys?'It is a tie! The next point could change everything.':data.scores.girls>data.scores.boys?'Girls are currently leading. Keep it up!':'Boys are currently leading. Keep it up!'}</div>`}
+function changeScore(t,n){data.scores[t]=Math.max(0,data.scores[t]+n);teams();save()}function resetScores(){if(confirm('Reset both team scores?')){data.scores={girls:0,boys:0};teams();save()}}
+function newBattle(){let q=lessons.flatMap((l,li)=>l.questions.map(x=>({x,li})));let item=q[Math.floor(Math.random()*q.length)];window.battle=item;document.getElementById('battleQ').textContent=item.x[0];document.getElementById('battleOptions').innerHTML=item.x[1].map((o,j)=>`<button class="option" style="width:100%;text-align:left" onclick="battleAnswer(${j})">${String.fromCharCode(65+j)}. ${esc(o)}</button>`).join('')}
+function battleAnswer(j){let b=window.battle,ok=j===b.x[2];document.getElementById('battleOptions').innerHTML=`<p class="feedback" style="color:${ok?'#13956c':'#bd5547'}">${ok?'Correct answer! Award a point to the team that answered.':'Not quite! The correct answer is '+esc(b.x[1][b.x[2]])+'.'}</p><div class="row"><button class="btn small" onclick="changeScore('girls',1)">Point: Girls</button><button class="btn small" style="background:#3676ce" onclick="changeScore('boys',1)">Point: Boys</button></div>`}
+function students(){view.innerHTML=`<div class="hero"><div class="eyebrow">CELEBRATE EVERY CONTRIBUTION</div><h1>Participation Stars 🌟</h1><p>Add your students, track classroom participation and recognize active learners.</p></div><div class="card" style="margin-top:17px"><h2 style="margin-top:0">Add a student</h2><div class="row"><input class="field" id="studentName" placeholder="Student full name"><select class="field" id="studentTeam"><option value="Girls">Girls team</option><option value="Boys">Boys team</option></select><button class="btn" onclick="addStudent()">+ Add student</button></div><p class="muted" style="font-size:11px">Participation counts are saved in this browser automatically.</p></div><div class="sectionhead"><div><h2>Class participation list</h2><p>${data.students.length} students registered · Highest participation appears first.</p></div><button class="btn ghost small" onclick="exportStudents()">Export CSV</button></div><div class="card" style="overflow:auto"><table class="table"><thead><tr><th>STUDENT</th><th>TEAM</th><th>PARTICIPATIONS</th><th>ACTIONS</th></tr></thead><tbody>${data.students.length?data.students.slice().sort((a,b)=>b.count-a.count).map(s=>`<tr><td><b>${esc(s.name)}</b></td><td>${s.team==='Girls'?'💗':'💙'} ${esc(s.team)}</td><td><b>${s.count}</b></td><td><button class="btn small" onclick="participate('${s.id}')">+1 Active</button> <button class="btn ghost small" onclick="removeStudent('${s.id}')">Delete</button></td></tr>`).join(''):`<tr><td colspan="4" class="empty">No students yet. Add your first student above!</td></tr>`}</tbody></table></div><div class="notice">🔒 This demo stores the class list only in this browser on this device. Use fictional names for a public demonstration, and avoid entering sensitive student information.</div>`}
+function addStudent(){let name=document.getElementById('studentName').value.trim(),team=document.getElementById('studentTeam').value;if(!name){alert('Please enter a student name.');return}data.students.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name,team,count:0});save();students()}
+function participate(id){let s=data.students.find(x=>x.id===id);if(s)s.count++;save();students()}function removeStudent(id){if(confirm('Delete this student from the participation list?')){data.students=data.students.filter(x=>x.id!==id);save();students()}}
+function exportStudents(){let rows=[['Name','Team','Participations'],...data.students.map(s=>[s.name,s.team,s.count])];let csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='ict-quest-participation.csv';a.click();URL.revokeObjectURL(a.href)}
+function mindmaps(){view.innerHTML=`<div class="hero"><div class="eyebrow">CONNECT THE IDEAS</div><h1>Mind Map Library 🧠</h1><p>Choose a lesson, then tap its mind map icon to open the complete visual summary.</p></div><div class="grid2" style="margin-top:18px">${lessons.map((l,i)=>`<div class="card mind-library-card"><span class="tag">UNIT ${l.unit} • LESSON ${l.n}</span><div class="row" style="align-items:center"><div class="mind-library-icon">🧠</div><div><h3>${l.icon} ${esc(l.title)}</h3><p>${esc(l.desc)}</p></div></div><button class="btn small" onclick="openMindMap(${i})">🗺️ Open full mind map</button></div>`).join('')}</div>`}
+save();home();
+</script></body></html>
